@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const uploadMiddleware = require("../utils/handleStorage.js");
+const { createItem } = require("../controllers/storage.js")
 
-router.get("/", (req, res) => {
-    const data = ["Hello", "world", "storage"];
-    res.send({ data });
-});
+router.post("/", uploadMiddleware.single("image"), createItem);
 
 module.exports = router;

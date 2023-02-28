@@ -1,4 +1,4 @@
-const { tracksModel } = require('../models');
+const { usersModel } = require('../models');
 
 /**
  * Obtain lists from DB 
@@ -27,7 +27,7 @@ const getItem = (req, res) => { }
 
 const createItem = async (req, res) => {
     const { body } = req;
-    const data = await tracksModel.create(body);
+    const data = await usersModel.create(body);
     res.send(data)
 }
 

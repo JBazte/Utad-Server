@@ -1,0 +1,54 @@
+GET http://localhost:3000/api/tracks HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/tracks/0123456789abcdef01234567 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/tracks HTTP/1.1
+Content-Type: application/json
+api_key: 8a73b35e-9fca-4d9c-8ecf-5514e4d8640a
+
+
+{
+    "name": "Ric",
+    "album": "Album",
+    "cover": "http://tttt.com",
+    "artist": {
+        "name": "Ric",
+        "nickname": "rsurname",
+        "nationality": "ES"
+    },
+    "duration": {
+        "start":1,
+        "end":2
+    },
+    "mediaId": "0123456789abcdef01234567"
+}
+
+###
+
+POST http://localhost:3000/api/storage HTTP/1.1
+Content-Type: multipart/form-data; boundary=Media
+
+--Media
+Content-Disposition: form-data; name="image"; filename="image.png"
+Content-Type: image/png
+
+< ./media/image.png
+--Media--
+
+
+###
+
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Joaquin Bazterrica",
+    "age": "21",
+    "email": "joaquin.bazterrica@live.u-tad.com",
+    "password": "abc123",
+    "role": "admin"
+}

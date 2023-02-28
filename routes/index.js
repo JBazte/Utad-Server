@@ -3,7 +3,6 @@ const fs = require("fs");
 const router = express.Router();
 const { getItems, getItem, createItem } = require('../controllers/tracks.js');
 const removeExtension = (fileName) => {
-    //Solo la primera parte del split (lo de antes del punto)
     return fileName.split('.').shift();
 }
 
