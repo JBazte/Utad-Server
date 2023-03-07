@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const router = express.Router();
-const { getItems, getItem, createItem } = require('../controllers/tracks.js');
+
 const removeExtension = (fileName) => {
     return fileName.split('.').shift();
 }
@@ -13,11 +13,5 @@ fs.readdirSync(__dirname).filter((file) => {
         router.use('/' + name, require('./' + name));
     }
 });
-
-router.get("/", getItems);
-
-router.get("/:id", getItem);
-
-router.post("/", createItem);
 
 module.exports = router;

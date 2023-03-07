@@ -2,14 +2,13 @@ GET http://localhost:3000/api/tracks HTTP/1.1
 
 ###
 
-GET http://localhost:3000/api/tracks/0123456789abcdef01234567 HTTP/1.1
+GET http://localhost:3000/api/tracks/63fdc51b53c7fc6d15ca5910 HTTP/1.1
 
 ###
 
 POST http://localhost:3000/api/tracks HTTP/1.1
 Content-Type: application/json
 api_key: 8a73b35e-9fca-4d9c-8ecf-5514e4d8640a
-
 
 {
     "name": "Ric",
@@ -29,6 +28,36 @@ api_key: 8a73b35e-9fca-4d9c-8ecf-5514e4d8640a
 
 ###
 
+POST http://localhost:3000/api/tracks HTTP/1.1
+Content-Type: application/json
+api_key: 8a73b35e-9fca-4d9c-8ecf-5514e4d8640a
+
+{
+    "name": "M3tamorphosis",
+    "album": "Whole Lotta Red",
+    "cover": "https://images.genius.com/f2c7a25dddcec2830732b5462b117c4d.498x498x1.png",
+    "artist": {
+        "name": "Playboi Carti",
+        "nickname": "Carti",
+        "nationality": "US"
+    },
+    "duration": {
+        "start":1,
+        "end":2
+    },
+    "mediaId": "0123456789abcdef01234567"
+}
+
+###
+
+GET http://localhost:3000/api/storage HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/storage/64072195bbd7e98daef36e4f HTTP/1.1
+
+###
+
 POST http://localhost:3000/api/storage HTTP/1.1
 Content-Type: multipart/form-data; boundary=Media
 
@@ -39,6 +68,9 @@ Content-Type: image/png
 < ./media/image.png
 --Media--
 
+###
+
+DELETE http://localhost:3000/api/storage/640721e7bbd7e98daef36e5f HTTP/1.1
 
 ###
 
@@ -51,4 +83,42 @@ Content-Type: application/json
     "email": "joaquin.bazterrica@live.u-tad.com",
     "password": "abc123",
     "role": "admin"
+}
+
+###
+
+PUT http://localhost:3000/api/tracks/63fde69a57019e5561baca7e HTTP/1.1
+Content-Type: application/json
+api_key: 8a73b35e-9fca-4d9c-8ecf-5514e4d8640a
+
+{
+    "name": "Rick",
+    "album": "Album",
+    "cover": "http://tttt.com",
+    "artist": {
+        "name": "Rick",
+        "nickname": "rsurname",
+        "nationality": "ES"
+    },
+    "duration": {
+        "start":1,
+        "end":2
+    },
+    "mediaId": "0123456789abcdef01234567"
+}
+
+###
+
+DELETE http://localhost:3000/api/tracks/640705e6de5565530e53ecf6 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Joaquin Bazterrica",
+    "age": "21",
+    "email": "example@example.com",
+    "password": "abc123"
 }

@@ -1,4 +1,6 @@
 const { tracksModel } = require('../models');
+const { matchedData } = require('express-validator');
+const { handleHttpError } = require('../utils/handleError');
 
 /**
  * Obtain lists from DB 
@@ -7,8 +9,16 @@ const { tracksModel } = require('../models');
  */
 
 const getItems = async (req, res) => {
-    const data = await tracksModel.find({});
-    res.send(data)
+    try {
+        const data = await tracksModel.find({});
+        if (!data) {
+            handleHttpError(res, 'ERROR_ITEMS_NOT_FOUND', 404);
+        } else {
+            res.send(data);
+        }
+    } catch (err) {
+        handleHttpError(res, 'ERROR_GET_ITEMS', 403);
+    }
 }
 
 /**
@@ -17,7 +27,19 @@ const getItems = async (req, res) => {
  * @param {*} res 
  */
 
-const getItem = (req, res) => { }
+const getItem = async (req, res) => {
+    try {
+        const { id } = matchedData(req);
+        const data = await tracksModel.findById(id);
+        if (!data) {
+            handleHttpError(res, 'ERROR_ITEM_NOT_FOUND', 404);
+        } else {
+            res.send(data);
+        }
+    } catch (err) {
+        handleHttpError(res, 'ERROR_GET_ITEM', 403);
+    }
+}
 
 /**
  * Insert a registry to DB
@@ -26,9 +48,17 @@ const getItem = (req, res) => { }
  */
 
 const createItem = async (req, res) => {
-    const { body } = req;
-    const data = await tracksModel.create(body);
-    res.send(data)
+    try {
+        const body = matchedData(req);
+        const data = await tracksModel.create(body);
+        if (!data) {
+            handleHttpError(res, 'ERROR_ITEM_NOT_CREATED', 500);
+        } else {
+            res.send(data);
+        }
+    } catch (err) {
+        handleHttpError(res, 'ERROR_CREATE_ITEM', 403);
+    }
 }
 
 /**
@@ -37,7 +67,19 @@ const createItem = async (req, res) => {
  * @param {*} res 
  */
 
-const updateItem = (req, res) => { }
+const updateItem = async (req, res) => {
+    try {
+        const { id, ...body } = matchedData(req);
+        const data = await tracksModel.findOneAndUpdate(id, body);
+        if (!data) {
+            handleHttpError(res, 'ERROR_ITEM_NOT_FOUND', 404);
+        } else {
+            res.send(data);
+        }
+    } catch (err) {
+        handleHttpError(res, 'ERROR_UPDATE_ITEM', 403);
+    }
+}
 
 /**
  * Delete a registry from DB
@@ -45,6 +87,18 @@ const updateItem = (req, res) => { }
  * @param {*} res 
  */
 
-const deleteItem = (req, res) => { }
+const deleteItem = async (req, res) => {
+    try {
+        const { id } = matchedData(req);
+        const data = await tracksModel.delete({ _id: id });
+        if (!data) {
+            handleHttpError(res, 'ERROR_ITEM_NOT_FOUND', 404);
+        } else {
+            res.send(data);
+        }
+    } catch (err) {
+        handleHttpError(res, 'ERROR_DELETE_ITEM', 403);
+    }
+}
 
 module.exports = { getItems, getItem, createItem, updateItem, deleteItem };
