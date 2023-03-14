@@ -20,4 +20,9 @@ const validatorGetItem = [
     (req, res, next) => validateResults(req, res, next)
 ];
 
-module.exports = { validatorCreateItem, validatorGetItem }
+const validatorUpdateUser = [
+    check("id").exists().notEmpty().isMongoId(),
+    (req, res, next) => validateResults(req, res, next)
+];
+
+module.exports = { validatorCreateItem, validatorGetItem, validatorUpdateUser }

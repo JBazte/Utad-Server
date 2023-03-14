@@ -1,4 +1,6 @@
 const { usersModel } = require('../models');
+const { matchedData } = require('express-validator');
+const { handleHttpError } = require("../utils/handleError");
 
 /**
  * Obtain lists from DB 
@@ -7,7 +9,7 @@ const { usersModel } = require('../models');
  */
 
 const getItems = async (req, res) => {
-    const data = await tracksModel.find({});
+    const data = await usersModel.find({});
     res.send(data)
 }
 
@@ -47,4 +49,26 @@ const updateItem = (req, res) => { }
 
 const deleteItem = (req, res) => { }
 
-module.exports = { getItems, getItem, createItem, updateItem, deleteItem };
+/**
+ * Update a user role to admin from DB
+ * @param {*} req 
+ * @param {*} res 
+ */
+
+const updateAdminItem = async (req, res) => {
+    try {
+        const { id } = matchedData(req);
+        const data = await usersModel.findById(id);
+        if (!data) {
+            handleHttpError(res, 'ERROR_USER_NOT_FOUND', 404);
+        } else {
+            data.role = "admin";
+            const user = await usersModel.updateOne({ "_id": id }, data);
+            res.send(user);
+        }
+    } catch (err) {
+        handleHttpError(res, 'ERROR_UPDATE_USER', 403);
+    }
+}
+
+module.exports = { getItems, getItem, createItem, updateItem, deleteItem, updateAdminItem };

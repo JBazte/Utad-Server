@@ -1,5 +1,5 @@
 const express = require("express");
-const { validatorRegister, validatorLogin } = require("../validators/auth");
+const { validatorRegister, validatorLogin } = require("../validators/auth.js");
 const { registerCtrl, loginCtrl } = require("../controllers/auth.js");
 const router = express.Router();
 
