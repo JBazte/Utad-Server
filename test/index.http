@@ -1,9 +1,9 @@
 GET http://localhost:3000/api/tracks HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDA3MWI4MTczY2VlNzQzYjU4NzdlMzgiLCJyb2xlIjoidXNlciIsImlhdCI6MTY3ODc4MzYyMiwiZXhwIjoxNjc4NzkwODIyfQ.kTUL-w48qSVTeuH7nBNsRdg5X_u0V9pNYwyByELgmbA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2NzkzOTE1MzMsImV4cCI6MTY3OTM5ODczM30.7bxpXsxiNRVrMPt9OHVsfW_Q8ojMaqTkBFA5Yt6YiqE
 
 ###
 
-GET http://localhost:3000/api/tracks/63fdc51b53c7fc6d15ca5910 HTTP/1.1
+GET http://localhost:3000/api/tracks/1 HTTP/1.1
 
 ###
 
@@ -145,3 +145,21 @@ GET http://localhost:3000/api/users HTTP/1.1
 
 PUT http://localhost:3000/api/users/admin/64104ac6dff3557d20a0c2ab HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDA3MWI4MTczY2VlNzQzYjU4NzdlMzgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzg3OTIwNDQsImV4cCI6MTY3ODc5OTI0NH0.Xlh4IOYCPoFdVhlqrufoBH7Zn2SG7vs0a3P8s0sufIs
+
+###
+
+POST http://localhost:3000/api/tracks HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE2NzkzOTA5NDIsImV4cCI6MTY3OTM5ODE0Mn0.nQkll7MG7rWveSb9ttRNWKInSM2x5W_m70gwLdl7icA
+
+{
+    "name": "M3tamorphosis",
+    "album": "Whole Lotta Red",
+    "cover": "https://images.genius.com/f2c7a25dddcec2830732b5462b117c4d.498x498x1.png",
+    "artist_name":"Playboi Carti",
+    "artist_nickname": "Carti",
+    "artist_nationality": "US",
+    "duration_start":1,
+    "duration_end":2,
+    "mediaId": "0123456789abcdef01234567"
+}

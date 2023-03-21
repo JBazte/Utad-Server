@@ -47,7 +47,21 @@ const updateItem = (req, res) => { }
  * @param {*} res 
  */
 
-const deleteItem = (req, res) => { }
+const deleteItem = async (req, res) => {
+    try {
+        const { id } = matchedData(req);
+        var data = "";
+        if (process.env.ENGINE_DB === 'nosql') {
+            data = await usersModel.deleteOne({ _id: id });
+        } else {
+            data = await usersModel.destroy({ where: { id: id } });
+        }
+        res.send(data);
+    } catch (err) {
+        console.log(err)
+        handleHttpError(res, 'ERROR_DELETE_USER');
+    }
+}
 
 /**
  * Update a user role to admin from DB

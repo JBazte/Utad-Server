@@ -9,7 +9,7 @@ router.get("/", authMiddleware, getItems);
 
 router.get("/:id", validatorGetItem, getItem);
 
-router.post("/", authMiddleware, checkRol(["admin"]), validatorCreateItem, createItem);
+router.post("/", authMiddleware, checkRol(["user", "admin"]), validatorCreateItem, createItem);
 
 router.put("/:id", validatorCreateItem, updateItem);
 

@@ -10,14 +10,19 @@ const { handleHttpError } = require('../utils/handleError');
 
 const getItems = async (req, res) => {
     try {
-        const user = req.user;
-        const data = await tracksModel.find({});
+        var data;
+        if (process.env.ENGINE_DB === 'nosql') {
+            data = await tracksModel.find();
+        } else {
+            data = await tracksModel.findAll();
+        }
         if (!data) {
             handleHttpError(res, 'ERROR_ITEMS_NOT_FOUND', 404);
         } else {
-            res.send({ data, user });
+            res.send({ data });
         }
     } catch (err) {
+        console.log(err);
         handleHttpError(res, 'ERROR_GET_ITEMS', 403);
     }
 }
@@ -31,7 +36,7 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
     try {
         const { id } = matchedData(req);
-        const data = await tracksModel.findById(id);
+        const data = await tracksModel.findOneData(id)
         if (!data) {
             handleHttpError(res, 'ERROR_ITEM_NOT_FOUND', 404);
         } else {
